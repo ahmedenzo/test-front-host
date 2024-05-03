@@ -24,7 +24,7 @@ export class Service {
       const currentHost = this.locationService.getHost();
       this.apiUrl = `${currentHost}/api/auth/banks`; 
       this.apiUrlbin = `${currentHost}/api/auth/bins`; 
-      this.apiUrl = `${currentHost}/api/auth/agencies`; 
+      this.apiUrlagence = `${currentHost}/api/auth/agencies`; 
       this.apiurlsmtp = `${currentHost}/api/auth/smtp`;
       this.apiurlblock = `${currentHost}/api/auth`;
 

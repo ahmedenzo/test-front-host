@@ -7,6 +7,6 @@ const locationService = new LocationService();
 export const environment = {
   production: true,
   apiURL: config.apiUrl,
-  port:'',
+
   host: locationService.getHost()
 };
