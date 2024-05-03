@@ -55,9 +55,9 @@ export class JwtAuthService {
 
   ) {
     const currentHost = this.locationService.getHost();
-    this.apiUrl = `https://${currentHost}/api/auth/banks'`; // Construct API URL for cards
-    this.baseUrl = `https://${currentHost}/api/auth'`; // Construct API URL for bins
-    this.apiUrlagence=`https://${currentHost}/api/auth/agencies'`; 
+    this.apiUrl = `${currentHost}/api/auth/banks`;
+    this.baseUrl = `${currentHost}/api/auth`;
+    this.apiUrlagence=`${currentHost}/api/auth/agencies`; 
     this.route.queryParams
       .subscribe(params => this.return = params['return'] || '/');
       this.initUserActivityDetection();
