@@ -4,16 +4,22 @@ import { Observable, of, delay, catchError, map, throwError } from 'rxjs';
 import { JwtAuthService } from 'app/shared/services/auth/jwt-auth.service';
 import { CardHolder } from 'app/shared/models/Cardholder';
 import { environment } from 'environments/environment.prod';
+import { LocationService } from '../home/location-service.service';
 @Injectable({
   providedIn: 'root'
 })
 export class GeneratedfileService {
   items: any[];
-  private apiUrl = environment.port+'/api/auth/card';
+  private apiUrl :string;
   constructor(
     private http: HttpClient,
-    private JwtAuthService :JwtAuthService
-  ) {}
+    private JwtAuthService :JwtAuthService,
+    private locationService: LocationService
+  ) {
+
+    const currentHost = this.locationService.getHost();
+    this.apiUrl = `${currentHost}/api/auth/card`;
+  }
   generateDataInputForCards(customerIds: number[]): Observable<any> {
     const params = new HttpParams().set('customerIds', customerIds.join(','));
 

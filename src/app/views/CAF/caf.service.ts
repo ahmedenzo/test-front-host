@@ -3,19 +3,26 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { JwtAuthService } from 'app/shared/services/auth/jwt-auth.service';
 import { environment } from 'environments/environment.prod';
+import { LocationService } from '../home/location-service.service';
 @Injectable({
   providedIn: 'root'
 })
 export class CafService {
 
   items: any[];
-  private apiUrl = environment.port+'/api/auth/file';
-  private apiUrlcard = environment.port+'/api/auth/card';
+  private apiUrl :string;
+  private apiUrlcard :string;
 
   constructor(
     private http: HttpClient,
-    private JwtAuthService :JwtAuthService
-  ) {}
+    private JwtAuthService :JwtAuthService,
+    private locationService: LocationService
+  ) {
+    const currentHost = this.locationService.getHost();
+    this.apiUrl = `${currentHost}/api/auth/file`; 
+    this.apiUrlcard = `${currentHost}/api/auth/card`;
+ 
+  }
 
   //******* Implement your APIs ********
   getItems(): Observable<any[]> {

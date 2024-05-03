@@ -20,8 +20,8 @@ export class UpdateCardService {
     private locationService: LocationService
   ) {
     const currentHost = this.locationService.getHost();
-    this.apiUrl = `https://${currentHost}/api/auth/card`; // Construct API URL for cards
-    this.apiUrlbin = `https://${currentHost}/api/auth/bins`; // Construct API URL for bins
+    this.apiUrl = `${currentHost}/api/auth/card`; // Construct API URL for cards
+    this.apiUrlbin = `${currentHost}/api/auth/bins`; // Construct API URL for bins
   }
 
   //******* Implement your APIs ********

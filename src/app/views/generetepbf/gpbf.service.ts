@@ -4,17 +4,23 @@ import { pbf } from 'app/shared/models/Cardholder';
 import { Observable, throwError, map } from 'rxjs';
 import { JwtAuthService } from 'app/shared/services/auth/jwt-auth.service';
 import { environment } from 'environments/environment.prod';
+import { LocationService } from '../home/location-service.service';
 @Injectable({
   providedIn: 'root'
 })
 export class GpbfService {
 
   items: any[];
-  private apiUrl = environment.port+'/api/auth/file';
+  private apiUrl :string;
   constructor(
     private http: HttpClient,
-    private JwtAuthService :JwtAuthService
-  ) {}
+    private JwtAuthService :JwtAuthService,
+    private locationService: LocationService
+  ) {
+    const currentHost = this.locationService.getHost();
+    this.apiUrl = `${currentHost}/api/auth/file`; 
+ 
+  }
 
   getItems(): Observable<any[]> {
     const headers = new HttpHeaders({

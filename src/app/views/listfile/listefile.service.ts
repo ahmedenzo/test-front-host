@@ -7,15 +7,23 @@ import { TranslateService } from '@ngx-translate/core';
 import { FileConfirmationDialogComponent } from '../cruds/crud-Dialog/file-confirmation-dialog/file-confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AppLoaderService } from 'app/shared/services/app-loader/app-loader.service';
+import { LocationService } from '../home/location-service.service';
 @Injectable({
   providedIn: 'root'
 })
 export class ListefileService {
   items: any[];
-  private apiUrl = environment.port+'/api/auth/card';
-  private apiUrlupload = environment.port+'/api/auth/card/upload';
-  constructor(   private http: HttpClient,private translate: TranslateService,  private dialog: MatDialog,private loader: AppLoaderService,
-    private JwtAuthService :JwtAuthService) { }
+  private apiUrl :string;
+  private apiUrlupload :string;
+  constructor(   private http: HttpClient,private translate: TranslateService,  private dialog: MatDialog,private loader: AppLoaderService,private locationService: LocationService,
+    private JwtAuthService :JwtAuthService) {
+
+      const currentHost = this.locationService.getHost();
+      this.apiUrl = `${currentHost}/api/auth/card`; 
+      this.apiUrlupload = `${currentHost}/api/auth/card/upload`; 
+
+
+     }
 
     getItems(): Observable<any[]> {
       const headers = new HttpHeaders({

@@ -8,6 +8,7 @@ import { JwtAuthService } from 'app/shared/services/auth/jwt-auth.service';
 import { Bin } from 'app/shared/models/bank';
 import { environment } from 'environments/environment.prod';
 import { LocationService } from '../home/location-service.service';
+
 @Injectable()
 export class CrudService {
   items: any[];
@@ -19,8 +20,8 @@ export class CrudService {
     private locationService: LocationService
   ) {
     const currentHost = this.locationService.getHost();
-    this.apiUrl = `https://${currentHost}/api/auth/card'`; // Construct API URL for cards
-    this.apiUrlbin = `https://${currentHost}/api/auth/bins'`; // Construct API URL for bins
+    this.apiUrl = `${currentHost}/api/auth/card`; // Construct API URL for cards
+    this.apiUrlbin = `${currentHost}/api/auth/bins`; // Construct API URL for bins
   }
 
   //******* Implement your APIs ********

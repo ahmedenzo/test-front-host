@@ -6,19 +6,30 @@ import { Bank,Bin,agence ,ConfigureDataRequest,confftp} from 'app/shared/models/
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as countrycitystatejson from 'countrycitystatejson';
 import { environment } from 'environments/environment.prod';
-
+import { LocationService } from '../home/location-service.service';
 @Injectable()
 export class Service {
-  private apiUrl = environment.port+'/api/auth/banks';
-  private apiUrlagence = environment.port+'/api/auth/agencies';
-  private apiUrlbin = environment.port+'/api/auth/bins';
-  private apiurlsmtp = environment.port+'/api/auth/smtp'
-  private apiurlblock = environment.port+'/api/auth'
+
+
+  private apiUrl: string;
+  private apiUrlbin: string;
+  private apiUrlagence: string;
+  private apiurlsmtp: string;
+  private apiurlblock: string;
 
 
   private countryData = countrycitystatejson;
-  constructor(private http: HttpClient,private snackBar: MatSnackBar)
-     {  }
+  constructor(private http: HttpClient,private snackBar: MatSnackBar,private locationService: LocationService)
+     { 
+      const currentHost = this.locationService.getHost();
+      this.apiUrl = `${currentHost}/api/auth/banks`; 
+      this.apiUrlbin = `${currentHost}/api/auth/bins`; 
+      this.apiUrl = `${currentHost}/api/auth/agencies`; 
+      this.apiurlsmtp = `${currentHost}/api/auth/smtp`;
+      this.apiurlblock = `${currentHost}/api/auth`;
+
+
+      }
      createAgency(agence: agence, bankname: string): Observable<agence> {
       return this.http.post<agence>(`${this.apiUrlagence}/create?bankname=${bankname}`, agence);
     }
