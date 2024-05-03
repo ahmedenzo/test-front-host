@@ -1,0 +1,87 @@
+<mat-card class="p-0">
+  <mat-tab-group>
+    <mat-tab label="Account Settings">
+      <mat-card-content class="mt-16">
+        <form [formGroup]="profileForm">
+          <div class="grid-container">
+            <div class="form-field">
+              <mat-form-field class="medium-width">
+                <input matInput formControlName="username" placeholder="Username">
+              </mat-form-field>
+            </div>
+          
+            <div class="form-field" *ngIf="roles && !roles.includes('Admin_SMT')">
+              <mat-form-field class="medium-width">
+                <input matInput formControlName="email" placeholder="Email">
+              </mat-form-field>
+            </div>
+          
+
+
+          
+
+          
+
+
+          </div>
+          
+        </form>
+      </mat-card-content>
+      
+    </mat-tab>
+    ********************
+ 
+
+    <mat-tab label="Privacy Settings">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Change Password</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="mt-16">
+          <form [formGroup]="passwordChangeForm" (ngSubmit)="changePassword()">
+            <div class="grid-container">
+              <div class="example-container" >
+                <mat-form-field appearance="fill">
+                  <mat-label>Old Password</mat-label>
+                  <input matInput [type]="hideOldPassword ? 'password' : 'text'" formControlName="oldPassword" placeholder="Enter old password">
+                  <button mat-icon-button matSuffix (click)="hideOldPassword = !hideOldPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideOldPassword">
+                    <mat-icon>{{hideOldPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                </mat-form-field>
+              </div>
+    
+              <div class="example-container" >
+                <mat-form-field appearance="fill">
+                  <mat-label>New Password</mat-label>
+                  <input matInput [type]="hideNewPassword ? 'password' : 'text'" formControlName="newPassword" placeholder="Enter new password">
+                  <button mat-icon-button matSuffix (click)="hideNewPassword = !hideNewPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideNewPassword">
+                    <mat-icon>{{hideNewPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                  <mat-hint *ngIf="passwordChangeForm.get('newPassword').invalid && passwordChangeForm.get('newPassword').touched && passwordChangeForm.get('newPassword').errors?.minlength">Password must be at least 8 characters long</mat-hint>
+                </mat-form-field>
+              </div>
+    
+              <div class="example-container" >
+                <mat-form-field appearance="fill">
+                  <mat-label>Confirm New Password</mat-label>
+                  <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword" placeholder="Confirm new password">
+                  <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirmPassword">
+                    <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                </mat-form-field>
+              </div>
+    
+              <div class="button-container">
+                <button mat-raised-button color="primary" type="submit" [disabled]="passwordChangeForm.invalid">Change Password</button>
+              </div>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </mat-tab>
+    
+    
+    
+    
+  </mat-tab-group>
+</mat-card>

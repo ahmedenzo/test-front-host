@@ -1,0 +1,52 @@
+<div class="page-wrap h-full slate">
+  <div class="session-form-hold">
+    <mat-progress-bar mode="determinate" class="session-progress"></mat-progress-bar>
+    <mat-card>
+      <mat-card-content>
+        <div class="text-center pt-8 pb-16">
+          <img width="160px" src="assets/images/smt.jpg" alt="">
+          <p class="text-muted m-0">Sign in to your account</p>
+        </div>
+
+        <p *ngIf="errorMsg" class="text-center"><small class="text-red">{{errorMsg}}</small></p>
+
+        <form [formGroup]="signinForm" (ngSubmit)="signin()">
+          <div>
+            <mat-form-field class="full-width">
+              <input
+                matInput
+                name="username"
+                formControlName="username"
+                placeholder="Username"
+                autocomplete="off"> <!-- Add autocomplete attribute -->
+              <mat-error *ngIf="signinForm.controls['username'].hasError('required') && signinForm.controls['username'].touched">Username is required</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="input-wrapper">
+            <mat-form-field class="full-width">
+              <input
+                type="password"
+                name="password"
+                matInput
+                formControlName="password"
+                placeholder="Password"
+                autocomplete="off"> <!-- Add autocomplete attribute -->
+              <mat-error *ngIf="signinForm.controls['password'].hasError('required') && signinForm.controls['password'].touched">Password is required</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="button-wrapper">
+            <button mat-raised-button class="mat-primary full-width" [disabled]="signinForm.invalid">Sign in</button>
+          </div>
+
+          <div class="link-wrapper">
+            <a [routerLink]="'/sessions/forgot-password'" class="mat-primary text-center full-width">Forgot password</a>
+          </div>
+
+
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
